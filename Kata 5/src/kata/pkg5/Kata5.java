@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Kata5 {
-    
+    public static Connection connection;
     public static void main(String[] args) {
         String URL_BD_SQLite = new String ("jdbc:sqlite:C:\\Users\\Usuario\\Documents\\NetBeansProjects\\DB_SQLite.db");
         Connection connection = connect (URL_BD_SQLite);
@@ -15,9 +15,9 @@ public class Kata5 {
     }
 
     private static Connection connect(String URL_BD_SQLite) {
-        Connection connection = null;
+        // Connection connection = null;
         try{
-            this.connection = DriverManager.getConnection(URL_BD_SQLite);
+            Kata5.connection = DriverManager.getConnection(URL_BD_SQLite);
             System.out.println("Base de datos conectada...");
         }
         catch(SQLException exception) {
@@ -43,17 +43,17 @@ public class Kata5 {
             ResultSet resultset = statement.executeQuery(SQL);
             System.out.println("ID \t Name \t Apellidos \t Departamento");
             while (resultset.next()){
-                System.out.println(resulset.getInt("ID") + "\t " +
-                                   resulset.getString("Name") + "\t " +
-                                   resulset.getString("Apellidos") + "\t " + 
-                                   resulset.getString("Departamento") + "\t " +);
+                System.out.println(resultset.getInt("ID") + "\t " +
+                                   resultset.getString("Name") + "\t " +
+                                   resultset.getString("Apellidos") + "\t " + 
+                                   resultset.getString("Departamento") + "\t ");
             }
         }
         catch(SQLException exception) {
-            System.out.println("ERROR(SQLException)" + exception.getMessage());
+            System.out.println("ERROR(Salida)" + exception.getMessage());
         }
     }
-    private Connection connection;
+
         
     
 }
