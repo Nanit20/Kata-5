@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package kata.pkg5;
 
 import java.sql.Connection;
@@ -11,16 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- *
- * @author Usuario
- */
 public class Kata5 {
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
-        String URL_BD_SQLite = new String ("jdbc:sqlite:C:\\Users\\Usuario\\Documents\\NetBeansProjects\\DB_SQLite");
+        String URL_BD_SQLite = new String ("jdbc:sqlite:C:\\Users\\Usuario\\Documents\\NetBeansProjects\\DB_SQLite.db");
         Connection connection = connect (URL_BD_SQLite);
         selectData_PEOPLE(connection);
     }
@@ -30,7 +19,6 @@ public class Kata5 {
         try{
             this.connection = DriverManager.getConnection(URL_BD_SQLite);
             System.out.println("Base de datos conectada...");
-            return connection;
         }
         catch(SQLException exception) {
             System.out.println("ERROR(SQLException)" + exception.getMessage());
@@ -45,12 +33,27 @@ public class Kata5 {
                 System.out.println("ERROR(SQLException)" + exception.getMessage());
             }
         }
+        return connection;
     }
 
     private static void selectData_PEOPLE(Connection connection) {
         String SQL = "SELECT * FROM PEOPLE";
-        Statement statement = connection.createStatement();
-        ResultSet resultset = statement.executeQuery(SQL);
+        try{
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery(SQL);
+            System.out.println("ID \t Name \t Apellidos \t Departamento");
+            while (resultset.next()){
+                System.out.println(resulset.getInt("ID") + "\t " +
+                                   resulset.getString("Name") + "\t " +
+                                   resulset.getString("Apellidos") + "\t " + 
+                                   resulset.getString("Departamento") + "\t " +);
+            }
+        }
+        catch(SQLException exception) {
+            System.out.println("ERROR(SQLException)" + exception.getMessage());
+        }
     }
+    private Connection connection;
+        
     
 }
