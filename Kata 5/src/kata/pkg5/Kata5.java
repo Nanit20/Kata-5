@@ -9,9 +9,9 @@ import java.sql.Statement;
 public class Kata5 {
     public static Connection connection;
     public static void main(String[] args) {
-        String URL_BD_SQLite = new String ("jdbc:sqlite:C:\\Users\\Usuario\\Documents\\NetBeansProjects\\DB_SQLite.db");
+        String URL_BD_SQLite = new String ("jdbc:sqlite:C:\\Users\\Usuario\\Documents\\NetBeansProjects\\DB_SQLite\\miErcoles.db");
         Connection connection = connect (URL_BD_SQLite);
-        selectData_PEOPLE(connection);
+        
     }
 
     private static Connection connect(String URL_BD_SQLite) {
@@ -19,6 +19,7 @@ public class Kata5 {
         try{
             Kata5.connection = DriverManager.getConnection(URL_BD_SQLite);
             System.out.println("Base de datos conectada...");
+            selectData_PEOPLE(connection);
         }
         catch(SQLException exception) {
             System.out.println("ERROR(SQLException)" + exception.getMessage());
